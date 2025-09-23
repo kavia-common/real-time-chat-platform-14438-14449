@@ -1,0 +1,4 @@
+{
+    "command": "mongosh --host localhost --port 5000 --eval \"db.adminCommand(ping)\"",
+    "working_directory": "/home/kavia/workspace/code-generation/real-time-chat-platform-14438-14449/chat_database"
+}
