@@ -137,6 +137,15 @@ echo "To connect to the database, use one of the following commands:"
 echo "mongosh -u ${DB_USER} -p ${DB_PASSWORD} --port ${DB_PORT} --authenticationDatabase admin ${DB_NAME}"
 echo "$(cat db_connection.txt)"
 
+# Optionally run initialization (collections, validators, indexes) if script exists
+if [ -f "init/init_mongodb.js" ]; then
+    echo ""
+    echo "Running database initialization script (collections/indexes)..."
+    mongosh "mongodb://${DB_USER}:${DB_PASSWORD}@localhost:${DB_PORT}/${DB_NAME}?authSource=admin" --file "./init/init_mongodb.js" || {
+        echo "Initialization script encountered an issue. You can re-run it later with: ./init/run_init.sh"
+    }
+fi
+
 # MongoDB continues running in background
 echo ""
 echo "MongoDB is running in the background."
